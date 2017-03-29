@@ -1,5 +1,6 @@
 from shapedetector import ShapeDetector
 import cv2
+from matplotlib import pyplot as plt
 
 image= cv2.imread("shapes_and_colors.jpg")
 original=image.copy()
@@ -24,5 +25,12 @@ for c in cnts:
     cv2.putText(image, shape, (cX - 20, cY - 20),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
 # show the image
-cv2.imshow("Image", image)
-cv2.waitKey(0)
+plt.subplot(2,2,1),plt.imshow(original,cmap = 'gray'),plt.title('Original')
+plt.axis("off")
+
+plt.subplot(2,2,2),plt.imshow(thresh,cmap="gray"),plt.title('Threshold')
+plt.axis("off")
+
+plt.subplot(2,2,3),plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)),plt.title('Result')
+plt.axis("off")
+plt.show()
